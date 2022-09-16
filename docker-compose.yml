@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+    api: 
+      build: 
+         context: .
+         dockerfile: Dockerfile
+      restart: on-failure
+      ports:
+        - 5005:5005
+      environment:
+        SERVER_PORT: "5005"
+        MONGO_DSN: "mongodb://root:password@mongodb:27017/bequest?authSource=admin"
+      depends_on:
+        - mongodb
+    
+    mongodb:
+      image: mongo:latest
+      restart: always
+      environment:
+       MONGO_INITDB_ROOT_USERNAME: root
+       MONGO_INITDB_ROOT_PASSWORD: password
+      volumes:
+       - ./data/mongo:/data/db
+      ports:
+         - 27017:27017
