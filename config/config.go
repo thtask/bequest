@@ -1,8 +1,6 @@
 package config
 
 import (
-	"fmt"
-
 	"github.com/ilyakaznacheev/cleanenv"
 )
 
@@ -35,8 +33,6 @@ func NewConfig(mongoDsn, redisDsn, port string) (*Config, error) {
 	if port != "" {
 		cfg.Server.Port = port
 	}
-
-	fmt.Printf("%+v\n", cfg)
 
 	return cfg, nil
 }
